@@ -1,65 +1,42 @@
-# AWS SNS to Slack gateway
+# SC5 Serverless Boilerplate
 
-An AWS Lambda function that publishes posts to Slack based on AWS SNS messages
+sc5-serverless-boilerplate is a project template for new serverless services. Contents of the template:
+* plugin [serverless-mocha-plugin](https://github.com/SC5/serverless-mocha-plugin): enable test driven development using mocha, creation of functions from command line
+* plugin [serverless-offline] (https://github.com/dherault/serverless-offline): enable endpoint create from cli
+* plugin [serverless-webpack] (https://github.com/elastic-coders/serverless-webpack): enable endpoint create from cli
+* file `serverless.yml.json`: Register plugins above
+* file `webpack.config.js`: Settings for webpack-plugin
+* file `templates/function.ejs`: Template to use for new functions
 
-## Installation
+## Creating new project
 
-### Pre-requisites
+With Serverless Framework v1.5 and later, a new project based on the project template is initialized with the command
 
-You should have the following set up in your AWS environment:
-    
-    1. A basic lambda execution IAM role
-    2. Credentials set up in env variables / ~/.aws/credentials
+```
+> sls install -u https://github.com/SC5/sc5-serverless-boilerplate -n myservicename
+> cd myservicename
+> npm install
+```
 
-### Setup
+and with Serverless Framework v1.2 - v1.4
 
-Clone the project to your environment
+```
+> sls install -u https://github.com/SC5/sc5-serverless-boilerplate
+> mv sc5-serverless-boilerplate myservicename
+> cd myservicename
+> perl -pi -e "s/sc5-serverless-boilerplate/myservicename/" serverless.yml package.json
+> npm install
+```
 
-    > git clone https://github.com/SC5/sns2slack.git 
+## TODO
 
-Copy the config template (src/config_template.json) to src/config.json. Set the slack channel and tokens to match your environment.
-
-Copy the lambda environment template (example_lambdaenv.json) to lambdaenv.json. Set your AWS region and the Arn of the role used by your Lambda functions into lambdaenv.json.
-
-Install dependencies and deploy to AWS
-
-    > npm install
-    > gulp deploy
-
-Go to the AWS console and perform the following:
-    
-    1. Create an SNS topic for the slack posts
-    2. Create a subscription to the SNS topic for the Lambda function deployed above (sns2slack)
-
-## Using the Lambda function
-
-The function for posting to Slack is invoked by sending a message to the SNS topic. The message is a JSON object that has been stringified (message has to be a string). The JSON format is:
-
-    {
-        "channel": "-SLACK CHANNEL NAME-",
-        "message": "-YOUR MESSAGE (TEXT)-",
-        "iconEmoji": "-EMOJI TO USE IF ANY-",
-        "senderName": "-YOUR-NAME-HERE-",
-        "attachments": [
-            {
-                "title" : "-FIRST-ATTACHMENT-TITLE-",
-                "text" : "-FIRST-ATTACHMENT-TEXT-"
-            },
-            ...
-        ]
-    } 
-
-
+Please see project GitHub [issue tracker](https://github.com/SC5/sc5-serverless-boilerplate/issues).
 
 ## Release History
 
-* 2015/10/10 - v0.9.0 - Initial version of SNS 2 Slack gateway
-
+* 2016/11/02 - v1.0.0 - Initial version for Serverless 1.0
 
 ## License
 
-Copyright (c) 2015 [SC5](http://sc5.io/), licensed for users and contributors under MIT license.
-https://github.com/sc5/grunt-bobrsass-boilerplate/blob/master/LICENSE-MIT
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/SC5/sc5-aws-lambda-boilerplate/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+Copyright (c) 2016 [SC5](http://sc5.io/), licensed for users and contributors under MIT license.
+https://github.com/sc5/sc5-serverless-boilerplate/blob/master/LICENSE-MIT
