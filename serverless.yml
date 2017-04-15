@@ -28,8 +28,8 @@ package:
 functions:
   postSlack:
     handler: postSlack/index.handler
-    event:
-      - SNS: post-to-Slack
+    events:
+      - sns: post-to-Slack
 
 plugins:
   - serverless-mocha-plugin
